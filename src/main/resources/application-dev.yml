@@ -1,0 +1,33 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 10s  # 默认最小是1分钟，配置小于1分钟也是1分钟
+      cookie:
+        http-only: true # true - >限制浏览器js访问cookie，为了保证session的安全，cookie里面存的sessionId
+        secure: false # true -> 仅仅可以通过https发送cookie，不允许http发送cookie，为了保证session的安全，cookie里面存的sessionId
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/security_oauth2?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 666666
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  freemarker:
+    cache: false # 缓存配置 开发阶段应该配置为false 因为经常会改
+    suffix: .html # 模版后缀名 默认为ftl
+    charset: UTF-8 # 文件编码
+    template-loader-path: classpath:/templates/
+  security:
+    loginType: JSON
+
+
+logging:
+    config: classpath:log4j2-dev.xml
+
+mybatis:
+    configuration:
+      mapUnderscoreToCamelCase: true
