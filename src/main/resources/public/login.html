@@ -24,7 +24,30 @@
     <input type="button" onclick="smslogin()" value="登陆">
 </form>
 
+<br>
+<input type="button" onclick="crosTest()" value="测试跨域">
+
 <script>
+    /**
+     * 用postMan测试拿到token令牌放入下方header
+     * 测试spring-boot-security-jwt跨域
+     */
+    function crosTest(){
+        var headers = {};
+        headers['JWTHeaderName'] = "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1ODYxMDYyNTMsInN1YiI6ImFkbWluIiwiY3JlYXRlZCI6MTU4NjEwMjY1MzU3N30.Vxkwqll5trZN9MnftK37WoTQMICo4_dfZhI9_L1ZbGTuUflZMjFEM805r2LR0Gcr7rxTisgRCxFpdXbPsgP49Q";
+        $.ajax({
+            url: 'http://localhost:8080/hello',
+            type: "POST",
+            headers: headers,
+            success: function (data) {
+                alert("跨域请求配置成功")
+            },
+            error: function (data) {
+                alert("跨域请求配置失败")
+            }
+        });
+    }
+
     window.onload = function () {
         var kaptchaImg = document.getElementById("kaptcha");
 
