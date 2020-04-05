@@ -38,7 +38,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.enabled;
     }
 
     @Override
@@ -65,6 +65,7 @@ public class MyUserDetails implements UserDetails {
 
     public void setAccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
+        this.enabled = accountNonLocked;
     }
 
     public void setCredentialsNonExpired(boolean credentialsNonExpired) {

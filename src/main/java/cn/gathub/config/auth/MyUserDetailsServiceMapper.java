@@ -2,6 +2,7 @@ package cn.gathub.config.auth;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -37,4 +38,8 @@ public interface MyUserDetailsServiceMapper {
     })
     List<String> findAuthorityByRoleCodes(@Param("roleCodes") List<String> roleCodes);
 
+    @Update({" UPDATE sys_user u" +
+            "  SET u.enabled = #{enabled}" +
+            " WHERE u.username = #{username} or u.phone = #{username}" })
+    int updateEnabledByUsername(MyUserDetails myUserDetails);
 }
